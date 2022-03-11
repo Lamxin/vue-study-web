@@ -1,6 +1,8 @@
 const Vue = require("vue")
 // const app = Vue.createApp()
 const vueRouter = require("vue-router");
+const Home = {template: '<h1>这里是首页</h1>'}
+const About = () => import('../view');
 Vue.use(vueRouter);
 
 module.exports = () => {
@@ -9,16 +11,12 @@ module.exports = () => {
         routes:[
             {
                 path:"/",
-                component:{
-                    template:`<h1>这里是首页</h1>`
-                },
+                component: Home,
                 name:"home"
             },
             {
                 path:"/about",
-                component:{
-                    template:`<h1>这里是about</h1>`
-                },
+                component: About,
                 name:"about"
             }
         ]
