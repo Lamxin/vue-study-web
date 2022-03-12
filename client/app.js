@@ -1,14 +1,14 @@
-const Vue = require("vue");
-const createRouter = require("./router")
+const Vue = require('vue')
+const createRouter = require('./router')
 
 module.exports = (context) => {
-    const router = createRouter();
-    const app = new Vue({
-        router,
-        data:{
-            message:"Hello,Vue SSR!"
-        },
-        template:`
+  const router = createRouter()
+  const app = new Vue({
+    router,
+    data: {
+      message: 'Hello,Vue SSR!'
+    },
+    template: `
             <div>
                 <div>
                     <h1>{{message}}</h1>
@@ -23,10 +23,10 @@ module.exports = (context) => {
                 </div>
                 <router-view></router-view>
             </div>
-        ` 
-    });
-    return {
-        app,
-        router
-    }
+        `
+  })
+  return {
+    app,
+    router
+  }
 }

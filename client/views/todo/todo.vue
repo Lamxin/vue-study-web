@@ -23,53 +23,52 @@
 </template>
 
 <script>
-import Item from './item.vue';
-import Tabs from './tabs.vue';
-import { constants } from 'crypto';
+import Item from './item.vue'
+import Tabs from './tabs.vue'
 
-let id = 0;
+let id = 0
 
 export default {
-    data() {
-        return {
-            todos: [],
-            filter: 'all'
-        }
-    },
-    components: {
-        Item,
-        Tabs
-    },
-    computed: {
-        filterTodos() {
-            if(this.filter === 'all') {
-                return this.todos;
-            }
-            const filterCompleted = this.filter === 'completed';
-            return this.todos.filter(todo=> todo.completed===filterCompleted);
-        }
-    },
-    methods: {
-        addTodo(e) {
-            this.todos.unshift({
-                id: id++,
-                content: e.target.value,
-                completed: false
-            });
-
-            e.target.value = '';
-        },
-        deleteTodo(id) {
-            this.todos.splice(this.todos.findIndex(todo => id === todo.id), 1);
-        },
-        toggleFilter(state) {
-            console.log(state);
-            this.filter = state;
-        },
-        clearAllCompletedTodo() {
-            this.todos = this.todos.filter(todo=> todo.completed===false);
-        }
+  data () {
+    return {
+      todos: [],
+      filter: 'all'
     }
+  },
+  components: {
+    Item,
+    Tabs
+  },
+  computed: {
+    filterTodos () {
+      if (this.filter === 'all') {
+        return this.todos
+      }
+      const filterCompleted = this.filter === 'completed'
+      return this.todos.filter(todo => todo.completed === filterCompleted)
+    }
+  },
+  methods: {
+    addTodo (e) {
+      this.todos.unshift({
+        id: id++,
+        content: e.target.value,
+        completed: false
+      })
+
+      e.target.value = ''
+    },
+    deleteTodo (id) {
+      this.todos.splice(this.todos.findIndex(todo => id === todo.id), 1)
+    },
+    toggleFilter (state) {
+      console.log(state)
+      this.filter = state
+    },
+    clearAllCompletedTodo () {
+      this.todos = this.todos.filter(todo => todo.completed === false)
+    }
+  }
 }
 </script>
 

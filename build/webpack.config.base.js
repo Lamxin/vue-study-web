@@ -1,17 +1,25 @@
 const path = require('path')
-
+const createVueLoaderOptions = require('./vue-loader.config')
+const isDev = process.env.NODE_ENV === 'development'
 const config = {
     target: 'web',
-    entry: path.join(__dirname, 'src/index.js'),
+    entry: path.join(__dirname, '../client/index.js'),
     output: {
         filename: 'bundle.[hash:8].js',
-        path: path.join(__dirname, 'dist')
-    },
+        path: path.join(__dirname, '../dist')
+    },  
     module: { //webpack原生只支持js类型，es5语法，所以要处理使用处理语法的工具
         rules: [
             {
+                test: /\.(vue|js|jsx)$/,
+                loader: 'eslint-loader',
+                exclude: /node_modules/,
+                enforce: 'pre'
+            },
+            {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
+                options: createVueLoaderOptions(isDev)
             },
             {
                 test: /\.jsx$/,
@@ -36,7 +44,7 @@ const config = {
                         loader: 'url-loader',
                         options: {
                             limit: 1024,
-                            name: '[name].[ext]'
+                            name: 'resources/[path][name].[hash:8].[ext]'
                         }
                     }
                 ]

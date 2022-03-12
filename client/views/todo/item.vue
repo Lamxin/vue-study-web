@@ -2,7 +2,7 @@
     <div :class="['todo-item', todo.completed? 'completed': '']">
         <input 
             type="checkbox"
-            class="toggle" 
+            class="toggle"   
             v-model="todo.completed"
         >
         <label for="">{{todo.content}}</label>
@@ -12,17 +12,17 @@
 
 <script>
 export default {
-    props: {
-        todo: {
-            type: Object,
-            required: true
-        }
-    },
-    methods: {
-        deleteTodo() {
-            this.$emit('del', this.todo.id);
-        }
+  props: {
+    todo: {
+      type: Object,
+      required: true
     }
+  },
+  methods: {
+    deleteTodo () {
+      this.$emit('del', this.todo.id)
+    }
+  }
 }
 </script>
 
@@ -59,10 +59,10 @@ export default {
         appearance none
         outline none
         &:after
-            content url('../assets/images/unChecked.svg')
+            content url('../../assets/images/unChecked.svg')
 
         &:checked:after
-            content url('../assets/images/checked.svg')
+            content url('../../assets/images/checked.svg')
     .destory
         position absolute
         top 0

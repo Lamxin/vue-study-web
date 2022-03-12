@@ -12,34 +12,34 @@
 
 <script>
 export default {
-    props: {
-        filter: {
-            type: String,
-            required: true
-        },
-        todos: {
-            type: Array,
-            required: true
-        }
+  props: {
+    filter: {
+      type: String,
+      required: true
     },
-    data() {
-        return {
-            states: ['all', 'active', 'completed']
-        }
-    },
-    computed: {
-        unfinishedTodo: function() {
-            return this.todos.filter(todo => todo.completed===false);
-        }
-    },
-    methods: {
-        clearAllCompleted() {
-            this.$emit('clearAll');
-        },
-        toggleFilter(state) {
-            this.$emit('toggle', state);
-        }
+    todos: {
+      type: Array,
+      required: true
     }
+  },
+  data () {
+    return {
+      states: ['all', 'active', 'completed']
+    }
+  },
+  computed: {
+    unfinishedTodo: function () {
+      return this.todos.filter(todo => todo.completed === false)
+    }
+  },
+  methods: {
+    clearAllCompleted () {
+      this.$emit('clearAll')
+    },
+    toggleFilter (state) {
+      this.$emit('toggle', state)
+    }
+  }
 }
 </script>
 
