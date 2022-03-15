@@ -1,1 +1,1 @@
-import './instance/index'
+import './instance/extend'
