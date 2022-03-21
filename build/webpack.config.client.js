@@ -14,6 +14,9 @@ const devServer = {
   overlay: {
     errors: true
   },
+  historyApiFallback:{ // 解决前端加载路由，在浏览器回车会报错的问题
+    index: '/index.html'
+  },
   hot: true // 改了一个组件的代码，只重新加载该组件，不重新加载全部页面
 }
 

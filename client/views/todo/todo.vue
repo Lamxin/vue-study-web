@@ -1,20 +1,20 @@
 <template>
     <section class="real-app">
-        <input 
-            type="text" 
+        <input
+            type="text"
             class="add-input"
             autofocus="autofocus"
             placeholder="接下来做什么"
             @keyup.enter="addTodo"
         >
-        <Item  
+        <Item
             v-for="todo in filterTodos"
             :todo="todo"
             :key="todo.id"
             @del="deleteTodo"
         />
-        <Tabs 
-            :filter="filter" 
+        <Tabs
+            :filter="filter"
             :todos="todos"
             @toggle="toggleFilter"
             @clearAll="clearAllCompletedTodo"
@@ -29,6 +29,18 @@ import Tabs from './tabs.vue'
 let id = 0
 
 export default {
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      console.log('this.id is', vm.id)
+    })
+  },
+  beforeRouteUpdate (to, from, next) {
+    next()
+  },
+  beforeRouteLeave (to, from, next) {
+    next()
+  },
+  props: ['id'],
   data () {
     return {
       todos: [],
@@ -47,6 +59,9 @@ export default {
       const filterCompleted = this.filter === 'completed'
       return this.todos.filter(todo => todo.completed === filterCompleted)
     }
+  },
+  mounted () {
+    console.log(this.id)
   },
   methods: {
     addTodo (e) {
@@ -84,11 +99,11 @@ export default {
     width 100%
     font-size 24px
     font-family inherit
-    font-weight inherit 
+    font-weight inherit
     line-height 1.4em
     border none
-    outline none 
-    color inherit 
+    outline none
+    color inherit
     box-sizing border-box
     font-smoothing antialiased
     padding 16px 16px 16px 36px

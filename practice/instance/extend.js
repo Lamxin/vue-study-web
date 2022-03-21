@@ -1,6 +1,18 @@
 import Vue from 'vue'
 
+const ChildComponent = {
+  template: `<div>ChildComponent{{data.value}}</div>`,
+  inject: ['grandPa', 'data'],
+  mounted () {
+    console.log(this.$parent.$options.name) // 父组件
+    console.log(this.grandPa, this.text) // 祖先与子节点传值---子节点
+  }
+}
 const component = {
+  name: 'component',
+  components: {
+    ChildComponent
+  },
   props: {
     propOne: String
   },
@@ -16,6 +28,7 @@ const component = {
   template: `
     <div :style="style">
       <slot value="555" name="作用域插槽"></slot>
+      <child-component></child-component>
     </div>
   `,
   data () {
@@ -58,11 +71,38 @@ new Vue({
       text: '本组件数据'
     }
   },
-  template: `
-    <div>
-      <comp-one>
-        <div slot-scope="props">{{props}}{{props.value}}{{props.name}}{{text}}</div>
-      </comp-one>
-    </div>
-    `
+  provide () {
+    const data = {}
+
+    Object.defineProperty(data, 'value', {
+      get: () => this.text,
+      enumerable: true
+    }) // provide和inject的绑定默认不是可响应的
+
+    return {
+      grandPa: this, // 祖先与子节点传值---祖先
+      data
+    }
+  },
+  // template: `
+  //   <div>
+  //     <comp-one>
+  //       <div slot-scope="props">{{props}}{{props.value}}{{props.name}}{{text}}</div>
+  //     </comp-one>
+  //     <input type="text" v-model="text">
+  //   </div>
+  //   `,
+  render (createElement) { // render的用法
+    return createElement(
+      'comp-one',
+      {
+        ref: 'comp'
+      },
+      [
+        createElement('span', {
+          ref: 'span'
+        }, this.value)
+      ]
+    )
+  }
 })
