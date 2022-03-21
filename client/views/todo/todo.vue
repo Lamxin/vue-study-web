@@ -1,25 +1,25 @@
 <template>
-    <section class="real-app">
-        <input
-            type="text"
-            class="add-input"
-            autofocus="autofocus"
-            placeholder="接下来做什么"
-            @keyup.enter="addTodo"
-        >
-        <Item
-            v-for="todo in filterTodos"
-            :todo="todo"
-            :key="todo.id"
-            @del="deleteTodo"
-        />
-        <Tabs
-            :filter="filter"
-            :todos="todos"
-            @toggle="toggleFilter"
-            @clearAll="clearAllCompletedTodo"
-        />
-    </section>
+  <section class="real-app">
+    <input
+      type="text"
+      class="add-input"
+      autofocus="autofocus"
+      placeholder="接下来做什么"
+      @keyup.enter="addTodo"
+    >
+    <Item
+      v-for="todo in filterTodos"
+      :todo="todo"
+      :key="todo.id"
+      @del="deleteTodo"
+    />
+    <Tabs
+      :filter="filter"
+      :todos="todos"
+      @toggle="toggleFilter"
+      @clearAll="clearAllCompletedTodo"
+    />
+  </section>
 </template>
 
 <script>
@@ -61,7 +61,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.id)
+    console.log('this.id is', this.id)
   },
   methods: {
     addTodo (e) {

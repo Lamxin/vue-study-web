@@ -1,21 +1,62 @@
 <template>
   <div id="app">
+    <p style="text-align:center;color:#ffffff">{{counter}}</p>
+    <p style="text-align:center;color:#ffffff">{{fullName}}</p>
     <Header></Header>
-    <!-- <Todo></Todo> -->
-    <router-link to="/app/123">app</router-link>
+    <router-link to="/app">app</router-link>
+    <router-link to="/login">login</router-link>
     <router-view/>
-    <Footer></Footer>
+    <router-view name="foot"></router-view>
   </div>
 </template>
 
 <script>
 import Header from './layout/header.vue'
-import Footer from './layout/footer.jsx'
-
+import {
+  mapState,
+  mapGetters,
+  mapActions,
+  mapMutations
+} from 'vuex'
 export default {
   components: {
-    Header,
-    Footer
+    Header
+  },
+  mounted () {
+    let i = 1
+    setInterval(() => {
+      this.updateCount({ num: i++, num2: 2 })
+    }, 1000)
+    // this.updateCountSync({
+    //   num: 5,
+    //   time: 2000
+    // })
+    this['a/updateText']('123')
+  },
+  computed: {
+    ...mapState({
+      counter: 'count',
+      textA: state => state.a.text
+    }),
+    ...mapGetters({
+      fullName: 'fullName'
+    }),
+    // textA () {
+    //   return this.$store.state.a.text
+    // },
+    textB () {
+      return this.$store.state.b.text
+    }
+    // count () {
+    //   return this.$store.state.count
+    // },
+    // fullName () {
+    //   return this.$store.getters.fullName
+    // }
+  },
+  methods: {
+    ...mapActions(['updateCountSync']),
+    ...mapMutations(['updateCount', 'a/updateText'])
   }
 }
 </script>

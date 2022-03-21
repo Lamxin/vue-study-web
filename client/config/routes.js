@@ -4,12 +4,18 @@ export default [
     redirect: '/app'
   },
   {
-    path: '/app/:id',
+    path: '/app',
     props: true,
-    component: () => import('../views/todo/todo.vue')
+    components: {
+      default: () => import('../views/todo/todo.vue'),
+      foot: () => import('../layout/footer.jsx')
+    }
   },
   {
     path: '/login',
-    component: () => import('../views/login/login.vue')
+    components: {
+      default: () => import('../views/login/login.vue'),
+      foot: () => import('../layout/footer.jsx')
+    }
   }
 ]
