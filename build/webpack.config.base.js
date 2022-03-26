@@ -6,7 +6,8 @@ const config = {
   entry: path.join(__dirname, '../client/index.js'),
   output: {
     filename: 'bundle.[hash:8].js',
-    path: path.join(__dirname, '../dist')
+    path: path.join(__dirname, '../dist'),
+    publicPath: '/public/'
   },
   module: { // webpack原生只支持js类型，es5语法，所以要处理使用处理语法的工具
     rules: [

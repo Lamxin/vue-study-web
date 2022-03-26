@@ -5,7 +5,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge') // webpack合并工具
 const ExtractPlugin = require('extract-text-webpack-plugin')
 const baseConfig = require('./webpack.config.base')
-
+const VueClientPlugin = require('vue-server-renderer/client-plugin')
 let config
 
 const devServer = {
@@ -54,7 +54,8 @@ if (isDev) {
           NODE_ENV: '"development"'
         }
       }),
-      new HTMLPlugin()
+      new HTMLPlugin(),
+      new VueClientPlugin()
     ]
   })
 } else {

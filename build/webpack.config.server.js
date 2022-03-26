@@ -6,7 +6,6 @@ const merge = require('webpack-merge') // webpack合并工具
 const baseConfig = require('./webpack.config.base')
 const ExtractPlugin = require('extract-text-webpack-plugin')
 const VueServerPlugin = require('vue-server-renderer/server-plugin')
-const VueClientPlugin = require('vue-server-renderer/client-plugin')
 let config
 
 config = merge(baseConfig, {
@@ -15,8 +14,7 @@ config = merge(baseConfig, {
   devtool: 'source-map',
   output: {
     libraryTarget: 'commonjs2', // 指定export出去的形式
-    filename: 'server-entry.js',
-    path: path.join(__dirname, '../server-build')
+    filename: 'server-entry.js'
   },
   externals: Object.keys(require('../package.json').dependencies), // 不用打包vue,vuex,vue-router等，node运行环境中有，不需要重复打包
   module: {
@@ -44,8 +42,7 @@ config = merge(baseConfig, {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'
     }),
-    new VueServerPlugin(),
-    new VueClientPlugin()
+    new VueServerPlugin()
   ]
 })
 
