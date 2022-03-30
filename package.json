@@ -6,23 +6,30 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.config.client.js",
-    "build": "npm run clean && npm run build:client",
-    "clean": "rimraf dist",
+    "build:server": "cross-env NODE_ENV=production webpack --config build/webpack.config.server.js",
+    "build": "npm run clean && npm run build:client && npm run build:server",
+    "clean": "rimraf public && rimraf server-build",
     "lint": "eslint --ext .js --ext .jsx --ext .vue client/",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client/",
     "practice": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.practice.js",
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
-    "dev:server": "cross-env NODE_ENV=development node server/server.js"
+    "dev:server": "cross-env NODE_ENV=development node server/server.js",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "start": "cross-env NODE_ENV=production node server/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.17.1",
+    "concurrently": "^3.5.1",
     "ejs": "^2.5.7",
     "koa": "^2.4.1",
     "koa-router": "^7.4.0",
+    "koa-send": "^4.1.2",
     "memory-fs": "^0.4.1",
+    "nodemon": "^1.14.12",
     "vue": "^2.5.13",
+    "vue-meta": "^1.4.3",
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.13",
     "vuex": "^3.0.1"

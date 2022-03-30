@@ -14,6 +14,7 @@ config = merge(baseConfig, {
   devtool: 'source-map',
   output: {
     libraryTarget: 'commonjs2', // 指定export出去的形式
+    path: path.join(__dirname, '../server-build'),
     filename: 'server-entry.js'
   },
   externals: Object.keys(require('../package.json').dependencies), // 不用打包vue,vuex,vue-router等，node运行环境中有，不需要重复打包

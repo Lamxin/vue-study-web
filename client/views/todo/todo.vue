@@ -29,6 +29,9 @@ import Tabs from './tabs.vue'
 let id = 0
 
 export default {
+  metaInfo: {
+    title: '深一级的title'
+  },
   beforeRouteEnter (to, from, next) {
     next(vm => {
       console.log('this.id is', vm.id)

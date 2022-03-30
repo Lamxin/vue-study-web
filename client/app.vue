@@ -19,6 +19,9 @@ import {
   mapMutations
 } from 'vuex'
 export default {
+  metaInfo: {
+    title: '默认的title'
+  },
   components: {
     Header
   },
