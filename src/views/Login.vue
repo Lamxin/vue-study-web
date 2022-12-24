@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import KInput from "@/components/form/KInput.vue"
-import KFormItem from "@/components/form/KFormItem.vue"
-import KForm from '@/components/form/KForm.vue'
+import KInput from "@/components/KForm/KInput.vue"
+import KFormItem from "@/components/KForm/KFormItem.vue"
+import KForm from '@/components/KForm/KForm.vue'
 
 export default {
   name: 'Login',
