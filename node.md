@@ -18,5 +18,33 @@
     组件的根组件不要继承特性
 
 ## v-bind="$attrs"
-    
+
+## vue中install用法
+    · 全局注册组件
+    ` 
+    import ToolBar from "./ToolBar"
+    import Menu from "./Menu"
+    export default {
+        install (Vue) {
+            Vue.component('ToolBar', ToolBar)
+            Vue.component('Menu', Menu)
+        }
+    }
+    在main.js中直接引用并用Vue.use进行注册
+    import component from "@/components"
+    Vue.use(component)
+
+
+    `
+    · 全局自定义指令
+    `
+    export default {
+        install(Vue){
+            Vue.directive('drag')
+        }
+    }
+    在main.js中直接引用
+    import drag from "@/api"
+    Vue.use(drag)
+    `
 ***
