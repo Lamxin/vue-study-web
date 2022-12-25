@@ -25,6 +25,9 @@ function observe(obj){
     }
 }
 
+function set(obj, key, value) {
+    defineReactive(obj, key, value)
+}
 let student = {
     'name': 'zhangSan',
     'score': {
@@ -36,6 +39,10 @@ observe(student)
 
 student.name
 student.name = 'liSi'
+
 student.score.math = 80
 student.score = {math: 88}
 student.score.math
+
+set(student, 'sex', '女')
+student.sex
