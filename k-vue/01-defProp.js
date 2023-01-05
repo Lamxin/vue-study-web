@@ -1,3 +1,16 @@
+// 数组响应式
+// 1、替换数组原型中7个方法
+const orginalProto = Array.prototype
+const arrayProto = Object.create(orginalProto)
+['push', 'pop', 'shift', 'unshift'].forEach(method => {
+    arrayProto[method] = function() {
+        // 先执行原数组原型操作
+        orginalProto[method].apply(this, arguments)
+        // 执行更新
+ 
+    }
+});
+// 对象响应式
 function defineReactive(obj, key, val) {
     observe(val)
     
@@ -19,6 +32,13 @@ function defineReactive(obj, key, val) {
 function observe(obj){
     if(typeof obj !== 'object' || obj === null){
         return 
+    }
+    if(Array.isArray(obj)) {
+        obj.__proto__ = arrayProto
+        const keys = Object.keys(obj)
+        for(let i = 0; i < obj.length; i++){
+            observe(obj[i])
+        }
     }
     for(let key in obj){
         defineReactive(obj, key, obj[key])

@@ -55,6 +55,10 @@ class Compiler {
                 // 执行指令
                 this[dir] && this[dir](node, exp)
             }
+            if(this.isEvent(attrName)){
+                const dir = attrName.substring(1)
+                this.eventHandler(node, exp, dir)
+            }
         })
     }
 
@@ -84,5 +88,12 @@ class Compiler {
         return attr.indexOf('k-') === 0
     }
 
-    
+    isEvent(dir){
+        return dir.indexOf('@') === 0
+    }
+
+    eventHandler(node, exp, dir){
+        const fn = this.$vm.$options.methods && this.$vm.$options.methods[exp]
+        node.addEventListener(dir, fn.bind(this.$vm), dir)
+    }
 }
