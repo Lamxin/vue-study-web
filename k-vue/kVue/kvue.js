@@ -21,6 +21,14 @@ function proxy(vm, sourceKey){
     })
 }
 
+function observe(obj){
+    if(typeof obj !== 'object' || obj === null){
+        return 
+    }
+    
+    new Observer(obj)
+}
+
 class Observer {
     constructor(value) {
         if(typeof value === 'object') {
@@ -33,7 +41,6 @@ class Observer {
             defineReactive(obj, key, obj[key])
         })
     } 
-    // TODO 数组数据响应化，待补充
 }
 
 function defineReactive(obj, key, val) {
@@ -58,14 +65,6 @@ function defineReactive(obj, key, val) {
             }   
         } 
     })
-}
-
-function observe(obj){
-    if(typeof obj !== 'object' || obj === null){
-        return 
-    }
-    
-    new Observer(obj)
 }
 
 const watchers = []
